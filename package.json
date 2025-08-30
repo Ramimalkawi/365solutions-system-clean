@@ -4,7 +4,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "cd client && npm install --legacy-peer-deps && npm run build && cd .. && cp -r client/dist/* public/",
+    "build": "echo 'Build files already included'",
     "start": "node index.js",
     "dev": "cd client && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
