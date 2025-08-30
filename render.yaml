@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: 365solutions-nodejs-server
+    runtime: node
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: "npm install --production"
+    startCommand: "./start.sh"
+    autoDeploy: true
+    healthCheckPath: "/health"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
