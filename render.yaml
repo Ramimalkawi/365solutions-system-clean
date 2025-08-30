@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: 365solutions-system
+    env: node
+    plan: free
+    buildCommand: ../build.sh
+    startCommand: node index.js
+    rootDir: server
+    envVars:
+      - key: NODE_ENV
+        value: production

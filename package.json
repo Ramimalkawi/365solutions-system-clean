@@ -1,21 +1,24 @@
 {
   "name": "365solutions-system",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd .. && mkdir -p server/public && cp -r client/dist/* server/public/ && cd server && npm install",
-    "start": "cd server && node index.js",
-    "build-client": "cd client && npm run build",
+    "build": "cd client && npm install && npm run build && cd .. && cp -r client/dist/* public/",
+    "start": "node index.js",
     "dev": "cd client && npm run dev",
-    "install-client": "cd client && npm install",
-    "install-server": "cd server && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "description": "",
-  "workspaces": [
-    "client",
-    "server"
-  ]
+  "dependencies": {
+    "@react-email/components": "^0.0.42",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.4.0",
+    "nodemailer": "^7.0.5",
+    "resend": "^4.6.0"
+  }
 }
