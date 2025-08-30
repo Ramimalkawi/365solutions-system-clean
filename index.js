@@ -36,6 +36,16 @@ dotenv.config();
 
 const app = express();
 
+// Health check endpoint - make it clear this is a Node.js app
+app.get("/health", (req, res) => {
+  res.json({
+    status: "OK",
+    message: "365Solutions Express Server is running",
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV || "development",
+  });
+});
+
 // Serve static files from the React build directory
 app.use(express.static(path.join(__dirname, "public")));
 
