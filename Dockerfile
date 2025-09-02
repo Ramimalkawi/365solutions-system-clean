@@ -11,6 +11,7 @@ RUN npm install --production
 # Copy application code
 COPY . .
 
+# --- CACHE BUST: 2025-09-02-01 ---
 # Build the React frontend
 WORKDIR /app/client_backup
 RUN npm install
