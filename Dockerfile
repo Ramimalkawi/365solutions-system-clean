@@ -20,7 +20,9 @@ RUN npm run build
 WORKDIR /app
 
 # Expose port
-EXPOSE 10000
+# Force rebuild: update port and add comment
+# Last updated: 2025-09-02
+EXPOSE 8080
 
 # Start the application
 CMD ["npm", "start"]
