@@ -15,6 +15,8 @@ COPY server/ ./server/
 RUN npm install --production
 
 # --- CACHE BUST: 2025-09-02-02 ---
+# --- AGGRESSIVE CACHE BUST: 2025-09-02-03 ---
+COPY client_backup/cachebust.txt ./client_backup/cachebust.txt
 # Copy and build the React frontend
 COPY client_backup ./client_backup
 WORKDIR /app/client_backup
