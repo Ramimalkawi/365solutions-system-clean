@@ -62,8 +62,16 @@ const Navbar = () => {
         {/* 👇 Conditionally render User Management link for System Admin only */}
         {(technician?.name === "System Admin" ||
           technician?.permission === "SystemAdmin") && (
-          <NavLink to="/user-management" activeClassName="active">
-            👥 User Management
+          <>
+            <NavLink to="/user-management" activeClassName="active">
+              👥 User Management
+            </NavLink>
+          </>
+        )}
+        {/* 👇 Conditionally render Accounting link for accountants only */}
+        {technician?.isAccountant && (
+          <NavLink to="/accounting" activeClassName="active">
+            Accounting
           </NavLink>
         )}
         <NavLink to="/archived" activeClassName="active">

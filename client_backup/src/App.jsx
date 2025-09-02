@@ -6,6 +6,7 @@ import Devices from "./pages/Devices";
 import Archived from "./pages/Archived";
 import LoginPage from "./pages/LoginPage";
 import UserManagement from "./pages/UserManagement";
+import Accounting from "./pages/Accounting";
 
 import "./App.css";
 import NewTicket from "./pages/NewTicketPage";
@@ -17,6 +18,7 @@ import SystemAdminRoute from "./routes/SystemAdminRoute";
 import DeliveryPage from "./pages/DeliveryPage";
 import PartsDeliveryPage from "./pages/PartsDeliveryPage";
 import ReceiptPage from "./pages/ReceiptPage";
+import ReceivePayment from "./pages/ReceivePayment";
 
 function App() {
   return (
@@ -119,6 +121,22 @@ function App() {
             element={
               <PrivateRoute>
                 <ReceiptPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/accounting"
+            element={
+              <PrivateRoute>
+                <Accounting />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/receive-payment/:ticketId"
+            element={
+              <PrivateRoute>
+                <ReceivePayment />
               </PrivateRoute>
             }
           />

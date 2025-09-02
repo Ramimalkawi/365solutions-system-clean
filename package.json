@@ -23,6 +23,7 @@
   "license": "ISC",
   "dependencies": {
     "@react-email/components": "^0.0.42",
+    "@react-pdf/renderer": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",

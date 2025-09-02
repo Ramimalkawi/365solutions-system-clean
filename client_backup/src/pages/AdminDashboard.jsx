@@ -10,8 +10,9 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useUser } from "../context/userContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import "./AdminDashboard.css";
+import Accounting from "./Accounting";
 
 const AdminDashboard = () => {
   const { technician } = useUser();
@@ -179,6 +180,14 @@ const AdminDashboard = () => {
           >
             📚 View Archived
           </button>
+          {technician?.permission === "Accountant" && (
+            <button
+              className="action-btn accounting"
+              onClick={() => navigate("/accounting")}
+            >
+              💼 Accounting
+            </button>
+          )}
         </div>
       </div>
 
@@ -230,6 +239,11 @@ const AdminDashboard = () => {
           </div>
         )}
       </div>
+
+      <Routes>
+        {/* ...other routes... */}
+        <Route path="/accounting" element={<Accounting />} />
+      </Routes>
     </div>
   );
 };

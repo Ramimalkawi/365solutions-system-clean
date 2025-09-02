@@ -179,7 +179,22 @@ const PartsModal = ({ isOpen, onClose, ticket }) => {
     }
   };
 
-  const handleApply = () => {
+  // Helper to update shouldHaveInvoice based on current partsList
+  const updateShouldHaveInvoiceFlag = async (parts) => {
+    if (ticket) {
+      const hasPricedPart = parts.some((p) => parseFloat(p.price) > 0);
+      try {
+        await updateDoc(doc(db, "tickets", ticket.id), {
+          shouldHaveInvoice: hasPricedPart,
+        });
+      } catch (err) {
+        console.error("Failed to update shouldHaveInvoice:", err);
+      }
+    }
+  };
+
+  // Update handleApply to use helper
+  const handleApply = async () => {
     const newPart = {
       partNumber: service ? "" : partNumber,
       newSN: service ? "" : newSN,
@@ -190,10 +205,11 @@ const PartsModal = ({ isOpen, onClose, ticket }) => {
           ? customServiceType
           : serviceType
         : description,
-      quantity: quantity || "1", // Default to "1" if empty
-      price: price || "0", // Default to "0" if empty
+      quantity: quantity || "1",
+      price: price || "0",
     };
-    setPartsList([...partsList, newPart]);
+    const updatedParts = [...partsList, newPart];
+    setPartsList(updatedParts);
     setPartNumber("");
     setNewSN("");
     setOldSN("");
@@ -202,15 +218,25 @@ const PartsModal = ({ isOpen, onClose, ticket }) => {
     setQuantity("");
     setPrice("");
     setService(false);
-    setServiceType(""); // Reset service type
-    setCustomServiceType(""); // Reset custom service type
+    setServiceType("");
+    setCustomServiceType("");
+    await updateShouldHaveInvoiceFlag(updatedParts);
   };
 
-  const handleDeletePart = (indexToDelete) => {
-    const updatedParts = partsList.filter(
-      (_, index) => index !== indexToDelete
+  // Update part deletion logic to use helper
+  const handleDeletePart = async (index) => {
+    const updatedParts = partsList.filter((_, i) => i !== index);
+    setPartsList(updatedParts);
+    await updateShouldHaveInvoiceFlag(updatedParts);
+  };
+
+  // Update price change logic to use helper
+  const handlePriceChange = async (index, newPrice) => {
+    const updatedParts = partsList.map((part, i) =>
+      i === index ? { ...part, price: newPrice } : part
     );
     setPartsList(updatedParts);
+    await updateShouldHaveInvoiceFlag(updatedParts);
   };
 
   const handleSave = async () => {
