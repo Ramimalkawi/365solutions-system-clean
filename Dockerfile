@@ -2,23 +2,30 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy package files
+# Copy only server files first
 COPY package*.json ./
+COPY server.js ./
+COPY Procfile ./
+COPY railway.json ./
+COPY render.yaml ./
+COPY start.sh ./
+COPY server/ ./server/
 
 # Install dependencies for the server
 RUN npm install --production
 
-# Copy application code
-COPY . .
-
-# --- CACHE BUST: 2025-09-02-01 ---
-# Build the React frontend
+# --- CACHE BUST: 2025-09-02-02 ---
+# Copy and build the React frontend
+COPY client_backup ./client_backup
 WORKDIR /app/client_backup
 RUN npm install
 RUN npm run build
 
 # Go back to server root
 WORKDIR /app
+
+# Copy the rest of the files (if needed)
+COPY . .
 
 # Expose port
 # Force rebuild: update port and add comment
