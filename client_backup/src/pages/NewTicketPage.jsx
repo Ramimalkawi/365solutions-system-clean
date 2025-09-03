@@ -22,6 +22,9 @@ const testPdfUrl =
 import "./NewTicket.css";
 import SignaturePdfModal from "../components/SignaturePdfModal";
 import { useUser } from "../context/userContext";
+import { GlobalWorkerOptions } from "pdfjs-dist";
+
+GlobalWorkerOptions.workerSrc = `${window.location.origin}/pdf.worker.min.js`;
 
 const NewTicket = () => {
   const { technician } = useUser();
