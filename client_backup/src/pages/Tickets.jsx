@@ -133,7 +133,7 @@ const Tickets = () => {
         <div className="tickets-header-content">
           <div className="left-section">
             <div className="tickets-new">
-              <h1>🎫 Tickets for service</h1>
+              <h1>🎫 Tickets</h1>
               <button className="new-ticket-button" onClick={handleNewTicket}>
                 + New Ticket
               </button>
