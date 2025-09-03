@@ -5,8 +5,6 @@ import SignatureCanvas from "react-signature-canvas";
 import { PDFDocument, rgb, StandardFonts } from "pdf-lib";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { pdfjs, Document, Page } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "react-pdf/dist/esm/Page/TextLayer.css";
 import "./SignaturePdfModal.css";
 
 // Set the worker source to the correct path
